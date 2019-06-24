@@ -1,0 +1,26 @@
+Remote image editing application created with Spring Boot.
+Sending incorrect parameters of a given route results cause appropriate HTTP status and error information.
+
+The application stores images in Map <String, BufferedImage>.
+
+Dedicated controller implements the following operations on the image and responds with JSON syntax:
+
+1.	Posts image in a binary format and saves to the application's memory. Returns a unique identifier and information about the image (height, width) in JSON format.
+[POST]/image/add
+
+2.	Deletes the image with given identifier {id} from the application's memory, returns error 404 if the image was not found.
+[DELETE] /image/delete/{id}
+
+3.	Returns data in JSON format with the dimensions of the loaded image
+[GET] /image/{id}/size
+
+4.	Returns data in JSON format containing a normalized image histogram (for each RGB channel separately).
+[GET] /image/{id}/histogram
+5.	Returns the image section - the parameters of the fragment (start, stop, width, height) are sent as routing parameters. Returns an error if the parameters are not valid.
+[GET] /image/{id}/crop/{start}/{stop}/{width}/{height}
+
+6.	Returns image in gray scale.
+[GET]/image/{id}/blur/{radius}
+
+7.	Returns an image using a Gaussian blur filter with a given blurring radius. If the parameter is incorrect, the error is returned.
+[GET] /image/{id}/blur/{radius}
